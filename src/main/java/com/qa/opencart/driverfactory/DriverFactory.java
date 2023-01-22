@@ -62,12 +62,52 @@ public class DriverFactory {
 	
 	public Properties initProp() {
 		prop = new Properties();
+		FileInputStream ip=null;
+		
+		String envName = System.getProperty("env");
+		System.out.println("Running Tcs on Environment -->"+ envName);
+		
+		if(envName == null) {
+			System.out.println("No Env given thats the running on QA env...");
+			try {
+				ip = new FileInputStream("./src/test/resources/config/qa.config.properties");
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}else {
+			try {
+			switch (envName.toLowerCase()) {
+			case "qa":
+				ip = new FileInputStream("./src/test/resources/config/qa.config.properties");
+				break;
+
+			case "dev":
+				ip = new FileInputStream("./src/test/resources/config/dev.config.properties");
+				break;
+			case "prod":
+				ip = new FileInputStream("./src/test/resources/config/config.properties");
+				break;
+			case "stage":
+				ip = new FileInputStream("./src/test/resources/config/stage.config.properties");
+				break;
+			default:
+				System.out.println("Please pass the right environment");
+				break;
+			}
+			}catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
 		try {
-			FileInputStream ip = new FileInputStream("./src/test/resources/config/config.properties");
 			prop.load(ip);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return prop;

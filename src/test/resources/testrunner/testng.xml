@@ -6,6 +6,9 @@
 	<listeners>
 		<listener
 			class-name="com.qa.opencart.listners.ExtentReportListener" />
+			
+		<listener
+			class-name="com.qa.opencart.listners.TestAllureListener" />
 	</listeners>
 
 
@@ -16,4 +19,9 @@
 	</test>
 
 
+	<test name="Register Page Test">
+		<classes>
+			<class name="com.qa.opencart.tests.RegisterPageTest" />
+		</classes>
+	</test>
 </suite>
