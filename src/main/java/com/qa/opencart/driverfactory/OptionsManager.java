@@ -19,6 +19,14 @@ public class OptionsManager {
 
 	public ChromeOptions getChromeOptions() {
 		co = new ChromeOptions();
+		
+		if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+			co.setCapability("enableVNC", true);
+			co.setPlatformName("linux");
+			co.setBrowserVersion(prop.getProperty("browserversion"));
+		}
+		
+		
 		if (Boolean.parseBoolean(prop.getProperty("headless"))) {
 			System.out.println(".....Running the test in Headless mode.......");
 			co.setHeadless(true);
@@ -30,20 +38,15 @@ public class OptionsManager {
 		return co;
 	}
 
-	public EdgeOptions getEdgeOptions() {
-		eo = new EdgeOptions();
-		if (Boolean.parseBoolean(prop.getProperty("headless"))) {
-			System.out.println(".....Running the test in Headless mode.......");
-			eo.setHeadless(true);
-		}
-		if (Boolean.parseBoolean(prop.getProperty("incognito"))) {
-			System.out.println(".....Running the test in Incognito mode.......");
-			eo.addArguments("--incognito");
-		}
-		return eo;
-	}
 	public FirefoxOptions getFirefoxOptions() {
 		fo = new FirefoxOptions();
+		
+		if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+			fo.setCapability("enableVNC", true);
+			fo.setPlatformName("linux");
+			fo.setBrowserVersion(prop.getProperty("browserversion"));
+		}
+		
 		if (Boolean.parseBoolean(prop.getProperty("headless"))) {
 			System.out.println(".....Running the test in Headless mode.......");
 			fo.setHeadless(true);
@@ -53,6 +56,26 @@ public class OptionsManager {
 			fo.addArguments("--incognito");
 		}
 		return fo;
+	}
+	
+	
+	public EdgeOptions getEdgeOptions() {
+		eo = new EdgeOptions();
+		
+		if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+			eo.setCapability("enableVNC", true);
+			eo.setPlatformName("linux");
+		}
+		
+		if (Boolean.parseBoolean(prop.getProperty("headless"))) {
+			System.out.println(".....Running the test in Headless mode.......");
+			eo.setHeadless(true);
+		}
+		if (Boolean.parseBoolean(prop.getProperty("incognito"))) {
+			System.out.println(".....Running the test in Incognito mode.......");
+			eo.addArguments("--incognito");
+		}
+		return eo;
 	}
 
 }
