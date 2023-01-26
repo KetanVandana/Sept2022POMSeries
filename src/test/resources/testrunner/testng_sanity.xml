@@ -2,22 +2,21 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="Opencart App Test Regression Suite" thread-count="4" parallel="tests" verbose="4">
-	
+
 	<listeners>
-		<listener
-			class-name="com.qa.opencart.listners.ExtentReportListener" />
-			
-		<listener
-			class-name="com.qa.opencart.listners.TestAllureListener" />
+		<listener class-name="com.qa.opencart.listners.ExtentReportListener" />
+
+		<listener class-name="com.qa.opencart.listners.TestAllureListener" />
 	</listeners>
 
 
 	<test name="Login Page Test">
+		<parameter name="browser" value="chrome" />
+		<parameter name="browserversion" value="109.0" />
 		<classes>
 			<class name="com.qa.opencart.tests.LoginPageTest" />
 		</classes>
 	</test>
 
 
-	
 </suite>
